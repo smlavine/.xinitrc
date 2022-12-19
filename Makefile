@@ -12,10 +12,15 @@ all: .xinitrc
 
 check:
 	reuse lint
-	go test
+	go test ./...
 
 clean:
 	rm .xinitrc
+
+coverage:
+	go test -coverprofile=cover.out ./...
+	go tool cover -html=cover.out
+
 
 install: .xinitrc
 	cp -i .xinitrc $(PREFIX)/.xinitrc

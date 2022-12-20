@@ -24,5 +24,7 @@ coverage:
 
 install: .xinitrc
 	cp -i .xinitrc $(PREFIX)/.xinitrc
+	@# cp -i doesn't preserve x bit?
+	chmod +x $(PREFIX)/.xinitrc
 
 .PHONY: all check clean install

@@ -25,27 +25,32 @@ func Tryenv(key, fallback string) string {
 	}
 }
 
-// Starts the notification daemon.
-func startNotificationDaemon() error {
-	nd := exec.Command(NOTIFICATION_DAEMON)
-	nd.Stdout = os.Stdout
-	nd.Stderr = os.Stderr
-	return nd.Start()
+// Returns a Cmd for the notification daemon.
+func notifDaemon() *exec.Cmd {
+	cmd := exec.Command(NOTIFICATION_DAEMON)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	return cmd
 }
 
-// Runs the window manager. Uses WM if it exists; otherwise uses DEFAULT_WM.
-func runWM() error {
-	wm := exec.Command(Tryenv("WM", DEFAULT_WM))
-	wm.Stdout = os.Stdout
-	wm.Stderr = os.Stderr
-	return wm.Run()
+// Returns a Cmd for the window manager.
+func windowManager() *exec.Cmd {
+	cmd := exec.Command(Tryenv("WM", DEFAULT_WM))
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	return cmd
 }
 
 func main() {
-	if err := startNotificationDaemon(); err != nil {
+	notifications := notifDaemon()
+	wm := windowManager()
+
+	if err := notifications.Start(); err != nil {
 		log.Println(err)
 	}
-	if err := runWM(); err != nil {
+
+	if err := wm.Run(); err != nil {
 		log.Fatalln(err)
 	}
+
 }

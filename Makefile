@@ -8,7 +8,7 @@ PREFIX = $(HOME)
 all: .xinitrc
 
 .xinitrc: main.go
-	go build
+	go build -ldflags -s
 
 check:
 	reuse lint

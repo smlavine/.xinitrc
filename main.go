@@ -7,6 +7,8 @@ import (
 	"log"
 	"os"
 	"os/exec"
+
+	"git.sr.ht/~smlavine/.xinitrc/tryenv"
 )
 
 // The notification daemon to use.
@@ -14,16 +16,6 @@ const NOTIFICATION_DAEMON string = "dunst"
 
 // The window manager to use if WM is not set in the environment.
 const DEFAULT_WM string = "dwm"
-
-// Tryenv retrieves the value of the environment variable named by the key, or
-// returns the fallback value if the variable is not present.
-func Tryenv(key, fallback string) string {
-	if value, exists := os.LookupEnv(key); exists {
-		return value
-	} else {
-		return fallback
-	}
-}
 
 // Returns a Cmd for the notification daemon.
 func notifDaemon() *exec.Cmd {
@@ -35,7 +27,7 @@ func notifDaemon() *exec.Cmd {
 
 // Returns a Cmd for the window manager.
 func windowManager() *exec.Cmd {
-	cmd := exec.Command(Tryenv("WM", DEFAULT_WM))
+	cmd := exec.Command(tryenv.Tryenv("WM", DEFAULT_WM))
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	return cmd

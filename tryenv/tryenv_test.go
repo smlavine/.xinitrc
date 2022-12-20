@@ -1,7 +1,7 @@
 // Copyright (c) 2022 Sebastian LaVine <mail@smlavine.com>
 // SPDX-License-Identifier: MIT
 
-package main
+package tryenv
 
 import "testing"
 

@@ -6,13 +6,9 @@ package main
 import (
 	"os"
 	"testing"
-)
 
-func assert(t *testing.T, cond bool, format string, args ...interface{}) {
-	if !cond {
-		t.Errorf(format, args...)
-	}
-}
+	. "git.sr.ht/~smlavine/.xinitrc/assert"
+)
 
 func TestWindowManager(t *testing.T) {
 	t.Run("Default WM", func(t *testing.T) {
@@ -26,7 +22,7 @@ func TestWindowManager(t *testing.T) {
 		}
 
 		wm := windowManager()
-		assert(t, wm.Args[0] == DEFAULT_WM,
+		Assert(t, wm.Args[0] == DEFAULT_WM,
 			"Expected WM name to be %v, got %v",
 			DEFAULT_WM, wm.Args[0])
 	})
@@ -35,13 +31,13 @@ func TestWindowManager(t *testing.T) {
 		const WM = "examplewm"
 		t.Setenv("WM", WM)
 		wm := windowManager()
-		assert(t, wm.Args[0] == WM,
+		Assert(t, wm.Args[0] == WM,
 			"Expected WM name to be %v, got %v", WM, wm.Args[0])
 	})
 
 	t.Run("Stdout and Stderr", func(t *testing.T) {
 		wm := windowManager()
-		assert(t, wm.Stdout == os.Stdout, "wm.Stdout != os.Stdout")
-		assert(t, wm.Stderr == os.Stderr, "wm.Stderr != os.Stderr")
+		Assert(t, wm.Stdout == os.Stdout, "wm.Stdout != os.Stdout")
+		Assert(t, wm.Stderr == os.Stderr, "wm.Stderr != os.Stderr")
 	})
 }

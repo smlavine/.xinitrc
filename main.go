@@ -7,14 +7,18 @@ import "log"
 
 func main() {
 	notifications := notifDaemon()
+	background := backgroundSetter()
 	wm := windowManager()
 
 	if err := notifications.Start(); err != nil {
 		log.Println(err)
 	}
 
+	if err := background.Run(); err != nil {
+		log.Println(err)
+	}
+
 	if err := wm.Run(); err != nil {
 		log.Fatalln(err)
 	}
-
 }

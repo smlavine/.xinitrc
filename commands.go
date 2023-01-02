@@ -18,7 +18,8 @@ const DEFAULT_WM string = "dwm"
 
 // Returns a Cmd that sets the desktop background.
 func backgroundSetter() *exec.Cmd {
-	const file = "/usr/include/X11/bitmaps/xsnow"
+	const file = "/usr/include/X11/bitmaps/xsnow" // For the Holidays
+	//const file = "/usr/include/X11/bitmaps/xlogo32"
 	const bg = "rgb:14/13/7E"
 	const fg = "rgb:2A/89/F5"
 	cmd := exec.Command("xsetroot", "-bitmap", file, "-bg", bg, "-fg", fg)

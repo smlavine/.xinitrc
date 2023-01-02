@@ -7,7 +7,7 @@ PREFIX = $(HOME)
 
 all: .xinitrc
 
-.xinitrc: main.go
+.xinitrc: commands.go main.go
 	go build -ldflags -s
 
 check:

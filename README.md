@@ -1,6 +1,9 @@
 <!-- Copyright (c) 2022 Sebastian LaVine <mail@smlavine.com -->
 <!-- SPDX-License-Identifier: MIT -->
 
+**Abandoned; decided to rewrite the status bar portion of my .xinitrc to use
+dwmblocks instead.**
+
 This is a WIP rewrite of my .xinitrc configuration file, presently
 located [here][0], in Go. Why? First, to get more comfortable with Go;
 second, to waste time on something over holiday break; and third, to
